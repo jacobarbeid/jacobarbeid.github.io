@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jacob Arbeid</title>
+<meta name="description" content="[ONE-LINE META DESCRIPTION FOR SEARCH/SOCIAL — e.g. 'AI safety and security researcher.']">
+
+<!-- Fonts: Inter (nav/headings) + Source Serif 4 (body). Remove these two lines to fall back to system fonts. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg:        #f7f7f4;   /* cool off-white, deliberately not cream */
+    --ink:       #1c2230;   /* ink navy, body text */
+    --muted:     #5b6373;   /* secondary text */
+    --accent:    #3f5f7a;   /* muted blue-slate, links + headings */
+    --accent-dk: #2c4458;   /* hover */
+    --rule:      #d8d8d2;   /* hairline — the "narrow bridge" motif */
+    --maxw:      680px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .15s, color .15s; }
+  a:hover { color: var(--accent-dk); border-bottom-color: var(--accent-dk); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+  /* ---------- Nav ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(247,247,244,.92);
+    backdrop-filter: saturate(180%) blur(8px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-inner {
+    max-width: var(--maxw); margin: 0 auto; padding: 14px 24px;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+    font-family: "Inter", system-ui, sans-serif;
+  }
+  .nav-name { font-weight: 600; font-size: 16px; letter-spacing: -.01em; color: var(--ink); border: none; }
+  .nav-links { display: flex; gap: 18px; flex-wrap: wrap; }
+  .nav-links a { font-size: 14px; color: var(--muted); border: none; }
+  .nav-links a:hover { color: var(--accent-dk); }
+
+  /* ---------- Layout ---------- */
+  main { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  section { padding: 56px 0; border-bottom: 1px solid var(--rule); }
+  section:last-of-type { border-bottom: none; }
+
+  h1 { font-family: "Inter", sans-serif; font-weight: 600; font-size: 34px; line-height: 1.15; letter-spacing: -.02em; margin: 0 0 6px; }
+  h2 {
+    font-family: "Inter", sans-serif; font-weight: 600; font-size: 14px;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--accent);
+    margin: 0 0 22px;
+  }
+  h3 { font-family: "Inter", sans-serif; font-weight: 600; font-size: 18px; margin: 0 0 2px; letter-spacing: -.01em; }
+
+  p { margin: 0 0 18px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ---------- About ---------- */
+  .about-head { display: flex; align-items: center; gap: 22px; margin-bottom: 26px; }
+  .headshot {
+    width: 96px; height: 96px; border-radius: 50%; object-fit: cover;
+    background: #e4e4dd; flex: 0 0 auto; border: 1px solid var(--rule);
+  }
+  .descriptor { font-family: "Inter", sans-serif; font-size: 15px; color: var(--muted); margin: 0; }
+  .contact { font-family: "Inter", sans-serif; font-size: 15px; color: var(--muted); margin-top: 24px; }
+  .contact a { color: var(--accent); border: none; }
+  .contact .sep { color: var(--rule); margin: 0 8px; }
+
+  /* ---------- List blocks (Research / Fun) ---------- */
+  .item { padding: 16px 0; border-top: 1px solid var(--rule); }
+  .item:first-of-type { border-top: none; padding-top: 0; }
+  .item .desc { color: var(--muted); font-size: 16.5px; margin: 0; }
+  .item .desc a { font-size: 15px; }
+
+  /* ---------- Blog (REMOVABLE — see comment) ---------- */
+  .blog-line { color: var(--muted); margin-bottom: 18px; }
+  .blog-btn {
+    display: inline-block; font-family: "Inter", sans-serif; font-size: 15px; font-weight: 500;
+    padding: 9px 18px; border: 1px solid var(--accent); border-radius: 4px; color: var(--accent);
+  }
+  .blog-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    max-width: var(--maxw); margin: 0 auto; padding: 32px 24px 56px;
+    font-family: "Inter", sans-serif; font-size: 13px; color: var(--muted);
+  }
+
+  /* ---------- Mobile ---------- */
+  @media (max-width: 560px) {
+    body { font-size: 17px; }
+    h1 { font-size: 28px; }
+    .about-head { flex-direction: row; gap: 16px; }
+    .headshot { width: 72px; height: 72px; }
+    .nav-inner { flex-direction: column; align-items: flex-start; gap: 8px; }
+    section { padding: 44px 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    a { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-name" href="#about">Jacob Arbeid</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <!-- Blog nav link — delete this one line to remove the Blog section from the nav -->
+      <a href="#blog">Blog</a>
+      <a href="#fun">Fun</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section id="about">
+    <div class="about-head">
+      <!-- Replace src with your headshot file (e.g. headshot.jpg in the same folder). Keep it square; CSS crops to a circle. -->
+      <img class="headshot" src="[HEADSHOT.JPG]" alt="Jacob Arbeid">
+      <div>
+        <h1>Jacob Arbeid</h1>
+        <p class="descriptor">[ONE-LINE DESCRIPTOR — what you do, in a single line.]</p>
+      </div>
+    </div>
+
+    <p>[BIO PARAGRAPH 1 — who you are and what you're working on now.]</p>
+    <p>[BIO PARAGRAPH 2 — background / what you did before. Optional.]</p>
+    <p>[BIO PARAGRAPH 3 — what you're looking for / how people can be useful to you and vice versa. Optional.]</p>
+
+    <p class="contact">
+      <a href="mailto:[YOU@EMAIL.COM]">[you@email.com]</a>
+      <span class="sep">·</span>
+      <a href="[LINKEDIN URL]">LinkedIn</a>
+      <span class="sep">·</span>
+      <a href="[GITHUB URL]">GitHub</a>
+    </p>
+  </section>
+
+  <!-- ===================== RESEARCH ===================== -->
+  <section id="research">
+    <h2>Research</h2>
+
+    <div class="item">
+      <h3>[RESEARCH ITEM 1 — TITLE]</h3>
+      <p class="desc">[One line on what it is.] <a href="[URL]">Read →</a></p>
+    </div>
+
+    <div class="item">
+      <h3>[RESEARCH ITEM 2 — TITLE]</h3>
+      <p class="desc">[One line on what it is.] <a href="[URL]">Read →</a></p>
+    </div>
+
+    <div class="item">
+      <h3>[RESEARCH ITEM 3 — TITLE]</h3>
+      <p class="desc">[One line on what it is.] <a href="[URL]">Read →</a></p>
+    </div>
+  </section>
+
+  <!-- ===================== BLOG (REMOVABLE) =====================
+       To remove the whole Blog section: delete this entire <section> block
+       AND the single Blog <a> line in the nav above. Nothing else depends on it. -->
+  <section id="blog">
+    <h2>Blog</h2>
+    <p class="blog-line">[ONE LINE OF FRAMING — e.g. "Occasional notes on AI safety and security."]</p>
+    <a class="blog-btn" href="https://verynarrowbridge.substack.com">Read on Substack →</a>
+  </section>
+  <!-- ===================== END BLOG ===================== -->
+
+  <!-- ===================== FUN ===================== -->
+  <section id="fun">
+    <h2>Fun</h2>
+    <p class="blog-line">[ONE LINE OF FRAMING — optional, e.g. "A few side projects."]</p>
+
+    <div class="item">
+      <h3>[FUN PROJECT 1 — TITLE]</h3>
+      <p class="desc">[One line.] <a href="[URL]">See →</a></p>
+    </div>
+
+    <div class="item">
+      <h3>[FUN PROJECT 2 — TITLE]</h3>
+      <p class="desc">[One line.] <a href="[URL]">See →</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 Jacob Arbeid · <a href="mailto:[YOU@EMAIL.COM]">[you@email.com]</a>
+</footer>
+
+</body>
+</html>
