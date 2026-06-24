@@ -6,19 +6,22 @@
 <title>Jacob Arbeid</title>
 <meta name="description" content="Building in AI Security ]">
 
-<!-- Fonts: Inter (nav/headings) + Source Serif 4 (body). Remove these two lines to fall back to system fonts. -->
+<!-- Fonts: Inter (nav/headings) + Source Serif 4 (body, now incl. italic for the "(with …)" credits). -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet">
+
+<!-- Adds a class before paint so fade-in only applies when JS is on (no-JS users still see all content). -->
+<script>document.documentElement.className += ' js-anim';</script>
 
 <style>
   :root {
-    --bg:        #f7f7f4;   /* cool off-white, deliberately not cream */
-    --ink:       #1c2230;   /* ink navy, body text */
-    --muted:     #5b6373;   /* secondary text */
-    --accent:    #3f5f7a;   /* muted blue-slate, links + headings */
-    --accent-dk: #2c4458;   /* hover */
-    --rule:      #d8d8d2;   /* hairline — the "narrow bridge" motif */
+    --bg:        #f4f4f0;   /* Scheme 1: slightly deeper so white cards pop */
+    --ink:       #161b27;   /* darker ink = crisper body text */
+    --muted:     #565e6e;   /* secondary text */
+    --accent:    #34618a;   /* brighter, more saturated blue */
+    --accent-dk: #234766;   /* hover */
+    --rule:      #dcdcd5;   /* hairline — the "narrow bridge" motif */
     --maxw:      680px;
   }
 
@@ -43,7 +46,7 @@
   /* ---------- Nav ---------- */
   nav {
     position: sticky; top: 0; z-index: 10;
-    background: rgba(247,247,244,.92);
+    background: rgba(244,244,240,.92);
     backdrop-filter: saturate(180%) blur(8px);
     border-bottom: 1px solid var(--rule);
   }
@@ -82,6 +85,7 @@
   .descriptor { font-family: "Inter", sans-serif; font-size: 15px; color: var(--muted); margin: 0; }
   .contact { font-family: "Inter", sans-serif; font-size: 15px; color: var(--muted); margin-top: 24px; }
   .contact a { color: var(--accent); border: none; }
+  .contact a:hover { border-bottom: 1px solid var(--accent-dk); }
   .contact .sep { color: var(--rule); margin: 0 8px; }
 
   /* ---------- List blocks (Research / Fun) ---------- */
@@ -90,7 +94,38 @@
   .item .desc { color: var(--muted); font-size: 16.5px; margin: 0; }
   .item .desc a { font-size: 15px; }
 
-  /* ---------- Blog (REMOVABLE — see comment) ---------- */
+  /* ---------- Work cards (Option A: whole card clickable) ----------
+     Palette unchanged (Scheme 2): cards are white with a faint resting
+     shadow that deepens + lifts on hover. The entire card is the link. */
+  .item-card {
+    display: block;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+    background: #ffffff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    color: var(--ink);
+    text-decoration: none;
+    box-shadow: 0 1px 3px rgba(28,34,48,.04);
+    transition: border-color .18s, box-shadow .18s, transform .18s;
+  }
+  .item-card:last-of-type { margin-bottom: 0; }
+  .item-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 6px 20px rgba(28,34,48,.08);
+    transform: translateY(-2px);
+  }
+  .item-card h3 { color: var(--ink); }
+  .item-card .desc { color: var(--muted); font-size: 16.5px; margin: 8px 0 10px; }
+  .item-card .desc em { font-style: italic; }
+  .card-arrow {
+    display: inline-block;
+    font-family: "Inter", sans-serif; font-size: 14px; font-weight: 600;
+    color: var(--accent);
+  }
+  .item-card:hover .card-arrow { color: var(--accent-dk); }
+
+  /* ---------- Blog (REMOVABLE) ---------- */
   .blog-line { color: var(--muted); margin-bottom: 18px; }
   .blog-btn {
     display: inline-block; font-family: "Inter", sans-serif; font-size: 15px; font-weight: 500;
@@ -102,6 +137,17 @@
   footer {
     max-width: var(--maxw); margin: 0 auto; padding: 32px 24px 56px;
     font-family: "Inter", sans-serif; font-size: 13px; color: var(--muted);
+  }
+
+  /* ---------- Section fade-in on scroll (Transition 1) ---------- */
+  html.js-anim section {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  html.js-anim section.in-view {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   /* ---------- Mobile ---------- */
@@ -117,6 +163,8 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     a { transition: none; }
+    .item-card { transition: none; }
+    html.js-anim section { opacity: 1; transform: none; transition: none; }
   }
 </style>
 </head>
@@ -153,48 +201,41 @@
     <p> Previously: 
     <ul>
       <li><b>2023-2026:</b> Building AI evaluation programmes & national security engagement @ the <a href="https://aisi.gov.uk"> AI Security Institute </a></li>
-      <li><b>2021-2023:</b> Ran AI governance research and policy programmes @ the <a href="https://simoninstitute.ch"> Simon Institute for Longterm Governance</a></li>
+      <li><b>2021-2023:</b> AI governance research and programmes @ <a href="https://simoninstitute.ch">The Simon Institute</a></li>
       <li><b>2017-2021:</b> Student @ Cambridge University, but spent a lot of my time building a <a href="https://joinraise.org"> fundraising movement that's raised >$750k</a></li>
     </ul>
     <p></p>
-    <p>My contact details are below - reach out if you're a security researcher or want to build in AI safety and security. </p>
 
-    <p class="contact">
-      <span class="sep">·</span>
-      <a href="[https://linkedin.com/in/jacob-arbeid]">LinkedIn</a>
-      <span class="sep">·</span>
-      <a href="https://github.com/jacobarbeid">GitHub</a>
-    </p>
+    <p class="contact">If you're interested in my work, reach out on <a href="https://linkedin.com/in/jacob-arbeid">LinkedIn</a>.</p>
   </section>
 
   <!-- ===================== Work ===================== -->
-  <section id="Work">
+  <section id="work">
     <h2>Work</h2>
 
-    <div class="item">
+    <a class="item-card" href="AutoRange.pdf">
       <h3>Scaling difficult cyber range environments</h3>
-      <p class="desc"> Built a pipeline to scale the creation of difficult end-to-end cyber evaluations with simulated defences. First range was produced in 1 week, took >6 hours for a human expert to solve. (with Zac Saber) <a href="AutoRange.pdf"> <br> Read →</a></p>
-    </div>
+      <p class="desc">Built a pipeline to scale the creation of difficult end-to-end cyber evaluations with simulated defences. First range was produced in 1 week, took &gt;6 hours for a human expert to solve. <em>(with Zac Saber)</em></p>
+      <span class="card-arrow">Read →</span>
+    </a>
 
-    <div class="item">
-      <h3>Pre-deployment model evaluations </h3>
-      <p class="desc">I led teams running several AI model testing exercises pre-deployment. We predominantly tested models for risky autonomous capabilities. <a href="https://cdn.prod.website-files.com/663bd486c5e4c81588db7a1d/673b689ec926d8d32e889a8e_UK-US-Testing-Report-Nov-19.pdf"> <br> Example →</a></p>
-    </div>
+    <a class="item-card" href="https://cdn.prod.website-files.com/663bd486c5e4c81588db7a1d/673b689ec926d8d32e889a8e_UK-US-Testing-Report-Nov-19.pdf">
+      <h3>Pre-deployment model evaluations</h3>
+      <p class="desc">I led teams running several AI model testing exercises pre-deployment, predominantly testing models for risky autonomous capabilities. The linked report is one example of this kind of work.</p>
+      <span class="card-arrow">Example →</span>
+    </a>
 
-    <div class="item">
-      <h3>Eval task standard </h3>
-      <p class="desc">Standardised framework for long-horizon evaluation tasks in Inspect (with Sid Black and others) <a href="https://ukgovernmentbeis.github.io/as-evaluation-standard/"> <br> Read →</a></p>
-    </div>
+    <a class="item-card" href="https://ukgovernmentbeis.github.io/as-evaluation-standard/">
+      <h3>Eval task standard</h3>
+      <p class="desc">Standardised framework for long-horizon evaluation tasks in Inspect <em>(with Sid Black and others)</em></p>
+      <span class="card-arrow">Read →</span>
+    </a>
 
-    <div class="item">
-      <h3>Task bounty </h3>
-      <p class="desc">I ran a bounty programme for tasks and control settings that measure AI capabilities in deception, jailbreaks, steganographic reasoning, and self-replication. Ultimately grew to nearly 200 researchers contributing >150 tasks (with Jasmine Wang and others). <a href="[URL]"> <br> Read →</a></p>
-    </div>
-
-    <div class="item">
-      <h3>Sandbagging research </h3>
-      <p class="desc"> Measuring if AIs are capable of strategically concealing risky capabilities. With Jacob Merizian and others. <a href="https://www.lesswrong.com/posts/pPEeMdgjpjHZWCDFw/white-box-control-at-uk-aisi-update-on-sandbagging"> <br> Read →</a></p>
-    </div>
+    <a class="item-card" href="https://www.lesswrong.com/posts/pPEeMdgjpjHZWCDFw/white-box-control-at-uk-aisi-update-on-sandbagging">
+      <h3>Sandbagging research</h3>
+      <p class="desc">Measuring if AIs are capable of strategically concealing risky capabilities. <em>With Jacob Merizian and others.</em></p>
+      <span class="card-arrow">Read →</span>
+    </a>
   </section>
 
   <!-- ===================== BLOG (REMOVABLE) =====================
@@ -227,6 +268,18 @@
 <footer>
   © 2026 Jacob Arbeid
 </footer>
+
+<script>
+  // Transition 1 — reveal each section once as it scrolls into view.
+  (function () {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in-view'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
 
 </body>
 </html>
